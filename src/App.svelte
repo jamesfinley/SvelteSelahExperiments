@@ -16,7 +16,7 @@
 	
 	export let url = "";
 	
-	let tuning = new Tuning(
+	let mandolaTuning = new Tuning(
 		"Standard",
 		"Mandola",
 		[
@@ -26,6 +26,20 @@
 			new NoteOnFret(Notes.a),
 		]
 	);
+	let guitarTuning = new Tuning(
+		"Standard",
+		"Guitar",
+		[
+			new NoteOnFret(Notes.e),
+			new NoteOnFret(Notes.a),
+			new NoteOnFret(Notes.d),
+			new NoteOnFret(Notes.g),
+			new NoteOnFret(Notes.b),
+			new NoteOnFret(Notes.e),
+		]
+	);
+	
+	let tuning = mandolaTuning;
 	let rootNote = Notes.c;
 	let scale = Scales.major;
 	
@@ -33,7 +47,7 @@
 		alert('Show Settings');
 	}
 	function showTunings() {
-		alert('Show Tunings');
+		tuning = tuning.instrument == "Guitar" ? mandolaTuning : guitarTuning;
 	}
 	function changeRootNote(newRootNote) {
 		rootNote = newRootNote
