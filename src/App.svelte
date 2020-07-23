@@ -1,6 +1,6 @@
 <script>
 	import { Router, Link, Route, navigate } from "svelte-routing";
-	import Note from "./models/Note.js";
+	import Notes from "./models/Note.js";
 	import NoteOnFret from "./models/NoteOnFret.js";
 	import Tuning from "./models/Tuning.js";
 	import Scale from "./models/Scale.js";
@@ -20,13 +20,13 @@
 		"Standard",
 		"Mandola",
 		[
-			new NoteOnFret(Note.c),
-			new NoteOnFret(Note.g),
-			new NoteOnFret(Note.d),
-			new NoteOnFret(Note.a),
+			new NoteOnFret(Notes.c),
+			new NoteOnFret(Notes.g),
+			new NoteOnFret(Notes.d),
+			new NoteOnFret(Notes.a),
 		]
 	);
-	let rootNote = "C";
+	let rootNote = Notes.c;
 	let scale = new Scale("major", [1, 1, 0.5, 1, 1, 1]);
 	
 	function showSettings() {

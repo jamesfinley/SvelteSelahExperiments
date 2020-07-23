@@ -1,4 +1,5 @@
 <script>
+	import Notes from "../models/Note.js";
 	import { createEventDispatcher } from 'svelte';
 	
 	const dispatch = createEventDispatcher();
@@ -52,62 +53,62 @@
 <nav class="root-note-control">
 	<button
 		class={cClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'C'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.c})}}>
 		C
 	</button>
 	<button
 		class={cSharpClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'C#'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.cSharp})}}>
 		#
 	</button>
 	<button
 		class={dClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'D'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.d})}}>
 		D
 	</button>
 	<button
 		class={dSharpClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'D#'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.dSharp})}}>
 		#
 	</button>
 	<button
 		class={eClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'E'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.e})}}>
 		E
 	</button>
 	<button
 		class={fClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'F'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.f})}}>
 		F
 	</button>
 	<button
 		class={fSharpClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'F#'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.fSharp})}}>
 		#
 	</button>
 	<button
 		class={gClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'G'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.g})}}>
 		G
 	</button>
 	<button
 		class={gSharpClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'G#'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.gSharp})}}>
 		#
 	</button>
 	<button
 		class={aClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'A'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.a})}}>
 		A
 	</button>
 	<button
 		class={aSharpClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'A#'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.aSharp})}}>
 		#
 	</button>
 	<button
 		class={bClasses}
-		on:click={() => {dispatch('changeRootNote', {rootNote: 'B'})}}>
+		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.b})}}>
 		B
 	</button>
 </nav>

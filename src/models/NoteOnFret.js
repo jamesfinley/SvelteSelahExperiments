@@ -1,11 +1,13 @@
+import { Note } from "./Note.js";
+
 export default class NoteOnFret {
 	constructor(note, fret = 0) {
-		if (typeof note != "string") {
-			console.error("NoteOnString: note must be string");
+		if (!note || note.constructor != Note) {
+			console.error("NoteOnFret: note must be Note");
 			return;
 		}
 		if (typeof fret != "number") {
-			console.error("NoteOnString: fret must be number");
+			console.error("NoteOnFret: fret must be number");
 			return;
 		}
 		

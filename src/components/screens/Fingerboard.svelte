@@ -94,8 +94,8 @@
 		{/each}
 		{#each tuning.fingerboard.notesOnStrings as notesOnString}
 			<div class="fingerboard--string">
-				{#each notesOnString.filter(noteOnFret => notesInScale.indexOf(noteOnFret.note) > -1) as {fret, note}}
-					<div class="fingerboard--string--note {note == rootNote ? "fingerboard--string--note--root" : ""}" data-fret={fret}>{note}</div>
+				{#each notesOnString.filter(noteOnFret => notesInScale.map(note => note.name).indexOf(noteOnFret.note.name) > -1) as {fret, note}}
+					<div class="fingerboard--string--note {note == rootNote ? "fingerboard--string--note--root" : ""}" data-fret={fret}>{note.name}</div>
 				{/each}
 			</div>
 		{/each}

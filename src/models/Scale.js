@@ -1,4 +1,4 @@
-import {notesInOrder} from "./Note.js";
+import { Note, notesInOrder } from "./Note.js";
 
 export default class Scale {
 	constructor(name, steps) {
@@ -20,8 +20,8 @@ export default class Scale {
 	}
 	
 	notesForRootNote(rootNote) {
-		if (typeof rootNote != "string") {
-			console.error("Scale: notesForRootNote: rootNote must be string");
+		if (!rootNote || rootNote.constructor != Note) {
+			console.error("Scale: notesForRootNote: rootNote must be Note");
 			return;
 		}
 		

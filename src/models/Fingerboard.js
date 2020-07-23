@@ -10,6 +10,7 @@ export default class Fingerboard {
 		}
 		
 		this.tuning = tuning;
+		this.notesOnStrings = this.tuning.noteOnFrets.map((startingNote) => this.notesStartingAt(startingNote));
 	}
 	
 	notesStartingAt(noteOnFret, frets = 12) {
@@ -35,9 +36,5 @@ export default class Fingerboard {
 		}
 		
 		return noteOnFrets;
-	}
-	
-	notesOnStrings() {
-		return this.tuning.noteOnFrets.map((startingNote) => this.notesStartingAt(startingNote));
 	}
 }
