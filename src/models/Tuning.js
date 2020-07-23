@@ -1,4 +1,5 @@
 import NoteOnFret from "./NoteOnFret.js";
+import Fingerboard from "./Fingerboard.js";
 
 export default class Tuning {
 	constructor(name, instrument, noteOnFrets, diatonic = false) {
@@ -27,5 +28,6 @@ export default class Tuning {
 		this.instrument = instrument;
 		this.noteOnFrets = noteOnFrets;
 		this.diatonic = diatonic;
+		this.fingerboard = new Fingerboard(this);
 	}
 }
