@@ -1,5 +1,5 @@
 import Tuning from "./Tuning.js";
-import {notesInOrder} from "./Note.js";
+import { notesInOrder } from "./Note.js";
 import NoteOnFret from "./NoteOnFret.js";
 
 export default class Fingerboard {
