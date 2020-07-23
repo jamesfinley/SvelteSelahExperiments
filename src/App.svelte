@@ -3,7 +3,7 @@
 	import Notes from "./models/Note.js";
 	import NoteOnFret from "./models/NoteOnFret.js";
 	import Tuning from "./models/Tuning.js";
-	import Scale from "./models/Scale.js";
+	import { Scales } from "./models/Scale.js";
 	
 	import Navigation from './components/Navigation.svelte';
 	import RootNoteControl from './components/RootNoteControl.svelte';
@@ -27,7 +27,7 @@
 		]
 	);
 	let rootNote = Notes.c;
-	let scale = new Scale("major", [1, 1, 0.5, 1, 1, 1]);
+	let scale = Scales.major;
 	
 	function showSettings() {
 		alert('Show Settings');

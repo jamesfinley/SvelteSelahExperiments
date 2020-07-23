@@ -17,3 +17,9 @@ export default class Scale {
 		this.steps = steps;
 	}
 }
+
+export let Scales = {
+	major: new Scale("major", [1, 1, 0.5, 1, 1, 1]),
+	minor: new Scale("minor", [1, 0.5, 1, 1, 0.5, 1]),
+	minorPentatonic: new Scale("minor pentatonic", [1.5, 1, 1, 1.5]),
+};
