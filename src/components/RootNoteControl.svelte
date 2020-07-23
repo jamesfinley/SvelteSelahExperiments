@@ -1,10 +1,12 @@
 <script>
 	import Notes from "../models/Note.js";
 	import { createEventDispatcher } from 'svelte';
+	import { rootNote } from '../stores.js';
 	
-	const dispatch = createEventDispatcher();
-	
-	export let rootNote;
+	let rootNoteValue;
+	rootNote.subscribe(value => {
+		rootNoteValue = value;
+	});
 	
 	const rootClass = "root-note-control--root";
 	const accidentalClass = "root-note-control--accidental";
@@ -56,63 +58,63 @@
 
 <nav class="root-note-control">
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.c, Notes.cSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.c})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.c, Notes.cSharp)}
+		on:click={() => rootNote.update(value => Notes.c)}>
 		C
 	</button>
 	<button
-		class={accidentalNoteIsSelected(rootNote, Notes.cSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.cSharp})}}>
+		class={accidentalNoteIsSelected(rootNoteValue, Notes.cSharp)}
+		on:click={() => rootNote.update(value => Notes.cSharp)}>
 		#
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.d, Notes.dSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.d})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.d, Notes.dSharp)}
+		on:click={() => rootNote.update(value => Notes.d)}>
 		D
 	</button>
 	<button
-		class={accidentalNoteIsSelected(rootNote, Notes.dSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.dSharp})}}>
+		class={accidentalNoteIsSelected(rootNoteValue, Notes.dSharp)}
+		on:click={() => rootNote.update(value => Notes.dSharp)}>
 		#
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.e)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.e})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.e)}
+		on:click={() => rootNote.update(value => Notes.e)}>
 		E
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.f, Notes.fSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.f})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.f, Notes.fSharp)}
+		on:click={() => rootNote.update(value => Notes.f)}>
 		F
 	</button>
 	<button
-		class={accidentalNoteIsSelected(rootNote, Notes.fSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.fSharp})}}>
+		class={accidentalNoteIsSelected(rootNoteValue, Notes.fSharp)}
+		on:click={() => rootNote.update(value => Notes.fSharp)}>
 		#
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.g, Notes.gSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.g})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.g, Notes.gSharp)}
+		on:click={() => rootNote.update(value => Notes.g)}>
 		G
 	</button>
 	<button
-		class={accidentalNoteIsSelected(rootNote, Notes.gSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.gSharp})}}>
+		class={accidentalNoteIsSelected(rootNoteValue, Notes.gSharp)}
+		on:click={() => rootNote.update(value => Notes.gSharp)}>
 		#
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.a, Notes.aSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.a})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.a, Notes.aSharp)}
+		on:click={() => rootNote.update(value => Notes.a)}>
 		A
 	</button>
 	<button
-		class={accidentalNoteIsSelected(rootNote, Notes.aSharp)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.aSharp})}}>
+		class={accidentalNoteIsSelected(rootNoteValue, Notes.aSharp)}
+		on:click={() => rootNote.update(value => Notes.aSharp)}>
 		#
 	</button>
 	<button
-		class={rootNoteIsSelected(rootNote, Notes.b)}
-		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.b})}}>
+		class={rootNoteIsSelected(rootNoteValue, Notes.b)}
+		on:click={() => rootNote.update(value => Notes.b)}>
 		B
 	</button>
 </nav>

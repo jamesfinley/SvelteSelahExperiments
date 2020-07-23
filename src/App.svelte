@@ -40,7 +40,6 @@
 	);
 	
 	let tuning = mandolaTuning;
-	let rootNote = Notes.c;
 	let scale = Scales.major;
 	
 	function showSettings() {
@@ -91,13 +90,10 @@
 		<Route path="/staff" component="{Staff}" />
 		<Route path="/magic" component="{Magic}" />
 		<Route path="/">
-			<Fingerboard {...{tuning, rootNote, scale}} />
+			<Fingerboard {...{tuning, scale}} />
 		</Route>
 	</div>
-	<RootNoteControl
-		rootNote={rootNote}
-		on:changeRootNote={({detail: {rootNote}}) => { changeRootNote(rootNote) }}
-		/>
+	<RootNoteControl />
 	<Tabs
 		on:showFingerboard={() => {navigate('/')}}
 		on:showTablature={() => {navigate('/tablature')}}
