@@ -1,3 +1,5 @@
+import Scale from "./Scale.js";
+
 export class Note {
 	constructor(name) {
 		if (typeof name != "string") {
@@ -6,6 +8,23 @@ export class Note {
 		}
 		
 		this.name = name;
+	}
+	
+	notesForScale(scale) {
+		if (!scale || scale.constructor != Scale) {
+			console.error("Note: notesForScale: scale must be Scale");
+			return;
+		}
+		
+		let notesInOrderPadded = notesInOrder.concat(notesInOrder);
+		let notes = [this];
+		let index = notesInOrderPadded.indexOf(this);
+		scale.steps.forEach((step) => {
+			index += step * 2;
+			notes.push(notesInOrderPadded[index]);
+		});
+		
+		return notes;
 	}
 }
 
