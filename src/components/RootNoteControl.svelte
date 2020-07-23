@@ -6,19 +6,17 @@
 	
 	export let rootNote;
 	
-	$: cClasses = `root-note-control--root ${rootNote == 'C' || rootNote == 'C#' ? 'root-note-control--selected' : ''}`;
-	$: dClasses = `root-note-control--root ${rootNote == 'D' || rootNote == 'D#' ? 'root-note-control--selected' : ''}`;
-	$: eClasses = `root-note-control--root ${rootNote == 'E' ? 'root-note-control--selected' : ''}`;
-	$: fClasses = `root-note-control--root ${rootNote == 'F' || rootNote == 'F#' ? 'root-note-control--selected' : ''}`;
-	$: gClasses = `root-note-control--root ${rootNote == 'G' || rootNote == 'G#' ? 'root-note-control--selected' : ''}`;
-	$: aClasses = `root-note-control--root ${rootNote == 'A' || rootNote == 'A#' ? 'root-note-control--selected' : ''}`;
-	$: bClasses = `root-note-control--root ${rootNote == 'B' ? 'root-note-control--selected' : ''}`;
+	const rootClass = "root-note-control--root";
+	const accidentalClass = "root-note-control--accidental";
+	const selectedClass = 'root-note-control--selected';
 	
-	$: cSharpClasses = `root-note-control--accidental ${rootNote == 'C#' ? 'root-note-control--selected' : ''}`;
-	$: dSharpClasses = `root-note-control--accidental ${rootNote == 'D#' ? 'root-note-control--selected' : ''}`;
-	$: fSharpClasses = `root-note-control--accidental ${rootNote == 'F#' ? 'root-note-control--selected' : ''}`;
-	$: gSharpClasses = `root-note-control--accidental ${rootNote == 'G#' ? 'root-note-control--selected' : ''}`;
-	$: aSharpClasses = `root-note-control--accidental ${rootNote == 'A#' ? 'root-note-control--selected' : ''}`;
+	function rootNoteIsSelected(base, rootNote, expected1, expected2) {
+		const rootNoteName = rootNote.name;
+		if (expected1 && expected2) {
+			return base + ' ' + (rootNoteName == expected1.name || rootNoteName == expected2.name ? selectedClass : '');
+		}
+		return base + ' ' + (rootNoteName == expected1.name ? selectedClass : '');
+	}
 </script>
 
 <style type="text/scss">
@@ -52,62 +50,62 @@
 
 <nav class="root-note-control">
 	<button
-		class={cClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.c, Notes.cSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.c})}}>
 		C
 	</button>
 	<button
-		class={cSharpClasses}
+		class={rootNoteIsSelected(accidentalClass, rootNote, Notes.cSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.cSharp})}}>
 		#
 	</button>
 	<button
-		class={dClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.d, Notes.dSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.d})}}>
 		D
 	</button>
 	<button
-		class={dSharpClasses}
+		class={rootNoteIsSelected(accidentalClass, rootNote, Notes.dSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.dSharp})}}>
 		#
 	</button>
 	<button
-		class={eClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.e)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.e})}}>
 		E
 	</button>
 	<button
-		class={fClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.f, Notes.fSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.f})}}>
 		F
 	</button>
 	<button
-		class={fSharpClasses}
+		class={rootNoteIsSelected(accidentalClass, rootNote, Notes.fSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.fSharp})}}>
 		#
 	</button>
 	<button
-		class={gClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.g, Notes.gSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.g})}}>
 		G
 	</button>
 	<button
-		class={gSharpClasses}
+		class={rootNoteIsSelected(accidentalClass, rootNote, Notes.gSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.gSharp})}}>
 		#
 	</button>
 	<button
-		class={aClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.a, Notes.aSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.a})}}>
 		A
 	</button>
 	<button
-		class={aSharpClasses}
+		class={rootNoteIsSelected(accidentalClass, rootNote, Notes.aSharp)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.aSharp})}}>
 		#
 	</button>
 	<button
-		class={bClasses}
+		class={rootNoteIsSelected(rootClass, rootNote, Notes.b)}
 		on:click={() => {dispatch('changeRootNote', {rootNote: Notes.b})}}>
 		B
 	</button>
