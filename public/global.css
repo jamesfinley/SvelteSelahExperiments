@@ -1,0 +1,26 @@
+* {margin: 0; padding: 0}
+
+:root {
+	--background: #fff;
+	--foreground: #222;
+	--font: "Avenir Next";
+	--fontMedium: "Avenir Next Medium";
+	--fontDemiBold: "Avenir Next Demi Bold";
+}
+
+html, body {height: 100%}
+body {
+	background: var(--background);
+	font-family: var(--font);
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--foreground);
+}
+input, textarea, button { font: inherit; }
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #000;
+		--foreground: #fff;
+	}
+}
