@@ -1,8 +1,5 @@
 <script>
 	import { Router, Link, Route, navigate } from "svelte-routing";
-	import Notes from "./models/Note.js";
-	import NoteOnFret from "./models/NoteOnFret.js";
-	import { Scales } from "./models/Scale.js";
 	
 	import Navigation from './components/Navigation.svelte';
 	import RootNoteControl from './components/RootNoteControl.svelte';
@@ -14,13 +11,9 @@
 	import Magic from './components/screens/Magic.svelte';
 	
 	export let url = "";
-	let scale = Scales.major;
 	
 	function showSettings() {
 		alert('Show Settings');
-	}
-	function changeRootNote(newRootNote) {
-		rootNote = newRootNote
 	}
 </script>
 
@@ -59,7 +52,7 @@
 		<Route path="/staff" component="{Staff}" />
 		<Route path="/magic" component="{Magic}" />
 		<Route path="/">
-			<Fingerboard {...{scale}} />
+			<Fingerboard />
 		</Route>
 	</div>
 	<RootNoteControl />

@@ -1,7 +1,5 @@
 <script>
-	import { rootNote, tuning } from '../../stores.js';
-	
-	export let scale;
+	import { rootNote, tuning, scale } from '../../stores.js';
 </script>
 
 <svelte:head>
@@ -92,7 +90,7 @@
 		{/each}
 		{#each $tuning.fingerboard.notesOnStrings as notesOnString}
 			<div class="fingerboard--string">
-				{#each notesOnString.filter(noteOnFret => $rootNote.notesForScale(scale).map(note => note.name).indexOf(noteOnFret.note.name) > -1) as {fret, note}}
+				{#each notesOnString.filter(noteOnFret => $rootNote.notesForScale($scale).map(note => note.name).indexOf(noteOnFret.note.name) > -1) as {fret, note}}
 					<div class="fingerboard--string--note {note == $rootNote ? "fingerboard--string--note--root" : ""}" data-fret={fret}>{note.name}</div>
 				{/each}
 			</div>
