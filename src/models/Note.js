@@ -18,12 +18,11 @@ export class Note {
 		
 		const notesInOrderPadded = notesInOrder.concat(notesInOrder);
 		let index = notesInOrderPadded.indexOf(this);
-		const notes = [this, ...scale.steps.map(step => {
+		
+		return [this, ...scale.steps.map(step => {
 			index += step * 2;
 			return notesInOrderPadded[index];
 		})];
-		
-		return notes;
 	}
 }
 
