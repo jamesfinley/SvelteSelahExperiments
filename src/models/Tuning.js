@@ -69,27 +69,37 @@ class Fingerboard {
 	}
 }
 
-export const Tunings = {
-	mandola: new Tuning(
-		"Standard",
-		"Mandola",
-		[
-			new NoteOnFret(Notes.c),
-			new NoteOnFret(Notes.g),
-			new NoteOnFret(Notes.d),
-			new NoteOnFret(Notes.a),
+export const Tunings = [
+	{
+		name: "Guitar",
+		tunings: [
+			new Tuning(
+				"Standard",
+				"Guitar",
+				[
+					new NoteOnFret(Notes.e),
+					new NoteOnFret(Notes.a),
+					new NoteOnFret(Notes.d),
+					new NoteOnFret(Notes.g),
+					new NoteOnFret(Notes.b),
+					new NoteOnFret(Notes.e),
+				]
+			)
 		]
-	),
-	guitar: new Tuning(
-		"Standard",
-		"Guitar",
-		[
-			new NoteOnFret(Notes.e),
-			new NoteOnFret(Notes.a),
-			new NoteOnFret(Notes.d),
-			new NoteOnFret(Notes.g),
-			new NoteOnFret(Notes.b),
-			new NoteOnFret(Notes.e),
+	},
+	{
+		name: "Mandola",
+		tunings: [
+			new Tuning(
+				"Standard",
+				"Mandola",
+				[
+					new NoteOnFret(Notes.c),
+					new NoteOnFret(Notes.g),
+					new NoteOnFret(Notes.d),
+					new NoteOnFret(Notes.a),
+				]
+			)
 		]
-	),
-};
+	}
+];
