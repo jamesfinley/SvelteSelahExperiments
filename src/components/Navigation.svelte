@@ -1,8 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import Button from './Button.svelte';
-	
-	export let tuning;
+	import { tuning } from '../stores.js';
+	import { Tunings } from '../models/Tuning.js';
 	
 	const dispatch = createEventDispatcher();
 </script>
@@ -31,5 +31,5 @@
 <nav class="navigation">
 	<h1>Selah Scales</h1>
 	<div id="navigation--settings-button"><Button animationDirection="left" disabled on:click={()=>{dispatch('showSettings')}}>Settings</Button></div>
-	<div id="navigation--tunings-button"><Button animationDirection="right" mode="dropDown" on:click={()=>{dispatch('showTunings')}}>{tuning.instrument}: {tuning.name}</Button></div>
+	<div id="navigation--tunings-button"><Button animationDirection="right" mode="dropDown" on:click={() => tuning.update((value) => value.instrument == "Guitar" ? Tunings.mandola : Tunings.guitar )}>{$tuning.instrument}: {$tuning.name}</Button></div>
 </nav>

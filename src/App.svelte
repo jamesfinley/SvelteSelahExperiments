@@ -4,6 +4,7 @@
 	import NoteOnFret from "./models/NoteOnFret.js";
 	import Tuning from "./models/Tuning.js";
 	import { Scales } from "./models/Scale.js";
+	import { tuning } from "./stores.js";
 	
 	import Navigation from './components/Navigation.svelte';
 	import RootNoteControl from './components/RootNoteControl.svelte';
@@ -15,38 +16,13 @@
 	import Magic from './components/screens/Magic.svelte';
 	
 	export let url = "";
-	
-	let mandolaTuning = new Tuning(
-		"Standard",
-		"Mandola",
-		[
-			new NoteOnFret(Notes.c),
-			new NoteOnFret(Notes.g),
-			new NoteOnFret(Notes.d),
-			new NoteOnFret(Notes.a),
-		]
-	);
-	let guitarTuning = new Tuning(
-		"Standard",
-		"Guitar",
-		[
-			new NoteOnFret(Notes.e),
-			new NoteOnFret(Notes.a),
-			new NoteOnFret(Notes.d),
-			new NoteOnFret(Notes.g),
-			new NoteOnFret(Notes.b),
-			new NoteOnFret(Notes.e),
-		]
-	);
-	
-	let tuning = mandolaTuning;
 	let scale = Scales.major;
 	
 	function showSettings() {
 		alert('Show Settings');
 	}
 	function showTunings() {
-		tuning = tuning.instrument == "Guitar" ? mandolaTuning : guitarTuning;
+		// tuning = tuning.instrument == "Guitar" ? mandolaTuning : guitarTuning;
 	}
 	function changeRootNote(newRootNote) {
 		rootNote = newRootNote
@@ -81,7 +57,6 @@
 <Router url="{url}">
 <main>
 	<Navigation
-		tuning={tuning}
 		on:showSettings={showSettings}
 		on:showTunings={showTunings}
 		/>
@@ -90,7 +65,7 @@
 		<Route path="/staff" component="{Staff}" />
 		<Route path="/magic" component="{Magic}" />
 		<Route path="/">
-			<Fingerboard {...{tuning, scale}} />
+			<Fingerboard {...{scale}} />
 		</Route>
 	</div>
 	<RootNoteControl />

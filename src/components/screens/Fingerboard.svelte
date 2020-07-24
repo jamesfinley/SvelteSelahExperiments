@@ -1,7 +1,6 @@
 <script>
-	import { rootNote } from '../../stores.js';
+	import { rootNote, tuning } from '../../stores.js';
 	
-	export let tuning;
 	export let scale;
 </script>
 
@@ -87,14 +86,14 @@
 </style>
 
 <div class="fingerboard--wrapper">
-	<div class="fingerboard" style="--strings: {tuning.noteOnFrets.length}">
+	<div class="fingerboard" style="--strings: {$tuning.noteOnFrets.length}">
 		{#each [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as fret}
 			<div class="fingerboard--fret" data-fret={fret} />
 		{/each}
-		{#each tuning.fingerboard.notesOnStrings as notesOnString}
+		{#each $tuning.fingerboard.notesOnStrings as notesOnString}
 			<div class="fingerboard--string">
 				{#each notesOnString.filter(noteOnFret => $rootNote.notesForScale(scale).map(note => note.name).indexOf(noteOnFret.note.name) > -1) as {fret, note}}
-					<div class="fingerboard--string--note {note == rootNote ? "fingerboard--string--note--root" : ""}" data-fret={fret}>{note.name}</div>
+					<div class="fingerboard--string--note {note == $rootNote ? "fingerboard--string--note--root" : ""}" data-fret={fret}>{note.name}</div>
 				{/each}
 			</div>
 		{/each}

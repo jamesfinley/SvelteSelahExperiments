@@ -1,5 +1,5 @@
 import NoteOnFret from "./NoteOnFret.js";
-import { notesInOrder } from "./Note.js";
+import Notes, { notesInOrder } from "./Note.js";
 
 export default class Tuning {
 	constructor(name, instrument, noteOnFrets, diatonic = false) {
@@ -68,3 +68,28 @@ class Fingerboard {
 		return noteOnFrets;
 	}
 }
+
+export const Tunings = {
+	mandola: new Tuning(
+		"Standard",
+		"Mandola",
+		[
+			new NoteOnFret(Notes.c),
+			new NoteOnFret(Notes.g),
+			new NoteOnFret(Notes.d),
+			new NoteOnFret(Notes.a),
+		]
+	),
+	guitar: new Tuning(
+		"Standard",
+		"Guitar",
+		[
+			new NoteOnFret(Notes.e),
+			new NoteOnFret(Notes.a),
+			new NoteOnFret(Notes.d),
+			new NoteOnFret(Notes.g),
+			new NoteOnFret(Notes.b),
+			new NoteOnFret(Notes.e),
+		]
+	),
+};
