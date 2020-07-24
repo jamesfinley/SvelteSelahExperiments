@@ -1,5 +1,6 @@
 import NoteOnFret from "./NoteOnFret.js";
-import Notes, { notesInOrder } from "./Note.js";
+import Notes, { Note, notesInOrder } from "./Note.js";
+import Scale from "./Scale.js";
 
 export default class Tuning {
 	constructor(name, instrument, noteOnFrets, diatonic = false) {
@@ -37,6 +38,24 @@ export default class Tuning {
 				return new NoteOnFret(notesInOrder[index], fret + 1);
 			})];
 		});
+	}
+	
+	notesOnStringsInScale(scale, rootNote) {
+		if (!scale || scale.constructor != Scale) {
+			console.error("Tuning: notesOnStringsInScale must be Scale");
+			return;
+		}
+		if (!rootNote || rootNote.constructor != Note) {
+			console.error("NoteOnFret: notesOnStringsInScale must be Note");
+			return;
+		}
+		
+		const notesForScale = rootNote.notesForScale(scale).map(({name}) => name);
+		return this.fingerboard.map(
+			notesOnString => notesOnString.filter(
+				({note: {name: noteName}}) => notesForScale.some(scaleNoteName => scaleNoteName == noteName)
+			)
+		);
 	}
 }
 
