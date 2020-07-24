@@ -88,7 +88,7 @@
 		{#each [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as fret}
 			<div class="fingerboard--fret" data-fret={fret} />
 		{/each}
-		{#each $tuning.notesOnStringsInScale($scale, $rootNote) as notesOnString}
+		{#each $tuning.fingerboardForScale($scale, $rootNote) as notesOnString}
 			<div class="fingerboard--string">
 				{#each notesOnString as {fret, note}}
 					<div

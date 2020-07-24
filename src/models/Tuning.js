@@ -40,7 +40,7 @@ export default class Tuning {
 		});
 	}
 	
-	notesOnStringsInScale(scale, rootNote) {
+	fingerboardForScale(scale, rootNote) {
 		if (!scale || scale.constructor != Scale) {
 			console.error("Tuning: notesOnStringsInScale must be Scale");
 			return;
