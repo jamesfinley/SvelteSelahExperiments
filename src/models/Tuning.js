@@ -33,10 +33,7 @@ export default class Tuning {
 			let index = notesInOrder.indexOf(noteOnFret.note);
 			
 			return [noteOnFret, ...Array.from(Array(12).keys()).map((value, fret) => {
-				index++;
-				if (index == notesInOrder.length) {
-					index = 0;
-				}
+				index = index == notesInOrder.length - 1 ? 0 : index + 1;
 				return new NoteOnFret(notesInOrder[index], fret + 1);
 			})];
 		});
