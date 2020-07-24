@@ -1,13 +1,13 @@
 <script>
 	import { rootNote, tuning, scale } from '../../stores.js';
 	
-	$: fingerboard = $tuning.fingerboard.notesOnStrings.map(notesOnString => {
-		return notesOnString.filter(({note: {name: noteName}}) => {
-			return $rootNote
-				.notesForScale($scale)
-				.some(({name: scaleNoteName}) => scaleNoteName == noteName);
-		})
-	});
+	$: notesForScale = $rootNote.notesForScale($scale);
+	$: fingerboard = $tuning.fingerboard.notesOnStrings.map(
+		notesOnString => notesOnString.filter(
+			({note: {name: noteName}}) => $notesForScale
+				.some(({name: scaleNoteName}) => scaleNoteName == noteName)
+		)
+	);
 </script>
 
 <svelte:head>
