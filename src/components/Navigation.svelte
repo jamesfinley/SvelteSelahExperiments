@@ -10,8 +10,10 @@
 	
 	function changeTuning() {
 		let [instrument, name] = tuningSelect.split("|");
-		let selectedTuning = Tunings.find(({name: instrumentName}) => instrumentName == instrument).tunings.find(({name: tuningName}) => tuningName == name);
-		tuning.update(() => selectedTuning);
+		tuning.update(() => Tunings
+								.find(({name: instrumentName}) => instrumentName == instrument)
+								.tunings
+								.find(({name: tuningName}) => tuningName == name));
 	}
 </script>
 
@@ -55,7 +57,7 @@
 	<h1>Selah Scales</h1>
 	<div id="navigation--settings-button"><Button animationDirection="left" disabled on:click={()=>{dispatch('showSettings')}}>Settings</Button></div>
 	<div id="navigation--tunings-button">
-		<Button animationDirection="right" mode="dropDown" on:click={() => tuning.update((value) => value.instrument == "Guitar" ? Tunings.mandola : Tunings.guitar )}>{$tuning.instrument}: {$tuning.name}</Button>
+		<Button animationDirection="right" mode="dropDown">{$tuning.instrument}: {$tuning.name}</Button>
 		<select bind:value={tuningSelect} on:change={changeTuning}>
 			{#each Tunings as {name: instrument, tunings}}
 				<optgroup label={instrument}>
