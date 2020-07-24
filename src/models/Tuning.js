@@ -12,11 +12,7 @@ export default class Tuning {
 			console.error("Tuning: instrument must be string");
 			return;
 		}
-		if (!Array.isArray(noteOnFrets)) {
-			console.error("Tuning: noteOnStrings must be array");
-			return;
-		}
-		if (!noteOnFrets.every(noteOnFret => noteOnFret.constructor == NoteOnFret)) {
+		if (!Array.isArray(noteOnFrets) || !noteOnFrets.every(noteOnFret => noteOnFret.constructor == NoteOnFret)) {
 			console.error("Tuning: noteOnFrets must be array of NoteOnFret");
 			return;
 		}
