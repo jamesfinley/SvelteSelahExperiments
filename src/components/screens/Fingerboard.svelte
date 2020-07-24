@@ -2,7 +2,7 @@
 	import { rootNote, tuning, scale } from '../../stores.js';
 	
 	$: notesForScale = $rootNote.notesForScale($scale).map(({name}) => name);
-	$: fingerboard = $tuning.fingerboard.notesOnStrings.map(
+	$: fingerboard = $tuning.fingerboard.map(
 		notesOnString => notesOnString.filter(
 			({note: {name: noteName}}) => notesForScale.some(scaleNoteName => scaleNoteName == noteName)
 		)
