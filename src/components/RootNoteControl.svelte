@@ -1,6 +1,5 @@
 <script>
 	import Notes from "../models/Note.js";
-	import { createEventDispatcher } from 'svelte';
 	import { rootNote } from '../stores.js';
 	
 	const rootClass = "root-note-control--root";
