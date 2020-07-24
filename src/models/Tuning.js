@@ -42,11 +42,11 @@ export default class Tuning {
 	
 	fingerboardForScale(scale, rootNote) {
 		if (!scale || scale.constructor != Scale) {
-			console.error("Tuning: notesOnStringsInScale must be Scale");
+			console.error("Tuning: fingerboardForScale must be Scale");
 			return;
 		}
 		if (!rootNote || rootNote.constructor != Note) {
-			console.error("NoteOnFret: notesOnStringsInScale must be Note");
+			console.error("Tuning: fingerboardForScale must be Note");
 			return;
 		}
 		
