@@ -51,9 +51,7 @@
 		<Route path="/tablature" component="{Tablature}" />
 		<Route path="/staff" component="{Staff}" />
 		<Route path="/magic" component="{Magic}" />
-		<Route path="/">
-			<Fingerboard />
-		</Route>
+		<Route path="/" component="{Fingerboard}" />
 	</div>
 	<RootNoteControl />
 	<Tabs
