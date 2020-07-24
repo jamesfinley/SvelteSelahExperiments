@@ -16,33 +16,25 @@ export class Note {
 			return;
 		}
 		
-		let notesInOrderPadded = notesInOrder.concat(notesInOrder);
-		let notes = [this];
+		const notesInOrderPadded = notesInOrder.concat(notesInOrder);
 		let index = notesInOrderPadded.indexOf(this);
-		scale.steps.forEach((step) => {
+		const notes = [this, ...scale.steps.map(step => {
 			index += step * 2;
-			notes.push(notesInOrderPadded[index]);
-		});
+			return notesInOrderPadded[index];
+		})];
 		
 		return notes;
 	}
 }
 
-let Notes = {
-	c: new Note("C"),
-	cSharp: new Note("C#"),
-	d: new Note("D"),
-	dSharp: new Note("D#"),
-	e: new Note("E"),
-	f: new Note("F"),
-	fSharp: new Note("F#"),
-	g: new Note("G"),
-	gSharp: new Note("G#"),
-	a: new Note("A"),
-	aSharp: new Note("A#"),
-	b: new Note("B"),
-};
+let Notes = {};
+export let notesInOrder = [];
+["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"].forEach(noteString => {
+	let key = noteString.indexOf("#") > -1 ? noteString.toLowerCase().replace("#", "Sharp") : noteString.toLowerCase();
+	let value = new Note(noteString);
+	
+	Notes[key] = value;
+	notesInOrder.push(value);
+});
 
 export default Notes;
-
-export const notesInOrder = [Notes.c, Notes.cSharp, Notes.d, Notes.dSharp, Notes.e, Notes.f, Notes.fSharp, Notes.g, Notes.gSharp, Notes.a, Notes.aSharp, Notes.b];
