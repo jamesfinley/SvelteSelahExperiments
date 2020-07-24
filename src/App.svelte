@@ -2,9 +2,7 @@
 	import { Router, Link, Route, navigate } from "svelte-routing";
 	import Notes from "./models/Note.js";
 	import NoteOnFret from "./models/NoteOnFret.js";
-	import Tuning from "./models/Tuning.js";
 	import { Scales } from "./models/Scale.js";
-	import { tuning } from "./stores.js";
 	
 	import Navigation from './components/Navigation.svelte';
 	import RootNoteControl from './components/RootNoteControl.svelte';
@@ -20,9 +18,6 @@
 	
 	function showSettings() {
 		alert('Show Settings');
-	}
-	function showTunings() {
-		// tuning = tuning.instrument == "Guitar" ? mandolaTuning : guitarTuning;
 	}
 	function changeRootNote(newRootNote) {
 		rootNote = newRootNote
@@ -58,7 +53,6 @@
 <main>
 	<Navigation
 		on:showSettings={showSettings}
-		on:showTunings={showTunings}
 		/>
 	<div class="app--view">
 		<Route path="/tablature" component="{Tablature}" />
