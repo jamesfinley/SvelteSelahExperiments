@@ -1,16 +1,13 @@
 import Scale from './Scale.js';
-
 const faker = require('faker');
-let name;
-let steps;
-let scale;
 
-const spy = jest.spyOn(global.console, 'error');
+let name, steps, scale, spy;
 
 beforeEach(() => {
 	name = faker.random.words();
 	steps = [1,2,3].map(() => faker.random.number());
 	scale = new Scale(name, steps);
+	spy = jest.spyOn(global.console, 'error');
 });
 
 describe('Name', () => {
