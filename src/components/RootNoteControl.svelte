@@ -22,32 +22,7 @@
 </script>
 
 <style type="text/scss">
-	.root-note-control {
-		display: flex;
-		height: 44px;
-		border: 2px solid var(--foreground);
-		border-radius: 22px;
-		box-sizing: border-box;
-		overflow: hidden;
-		font-family: var(--fontMedium);
-	}
-	.root-note-control button {
-		border: 0;
-		background: transparent;
-		color: var(--foreground);
-		
-		&:hover, &.root-note-control--selected {
-			background: var(--foreground);
-			color: var(--background);
-		}
-	}
-	
-	.root-note-control--root {
-		width: calc((100% / (7 + ((5 * 2) / 3))));
-	}
-	.root-note-control--accidental {
-		width: calc((100% / (7 + ((5 * 2) / 3))) * (2/3));
-	}
+	@import 'RootNoteControl';
 </style>
 
 <nav class="root-note-control">

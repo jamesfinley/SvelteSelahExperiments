@@ -1,0 +1,33 @@
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 44px;
+	padding: 0 16px;
+}
+
+h1 {
+	font-family: var(--fontMedium);
+	order: 2;
+}
+#navigation--settings-button {
+	order: 1;
+}
+#navigation--tunings-button {
+	order: 3;
+}
+
+#navigation--tunings-button {
+	position: relative;
+	
+	select {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		
+		-webkit-appearance: none;
+		opacity: 0;
+	}
+}

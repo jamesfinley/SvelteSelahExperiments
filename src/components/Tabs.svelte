@@ -4,23 +4,7 @@
 </script>
 
 <style type="text/scss">
-	nav {
-		display: flex;
-		border-top: 1px solid var(--foreground);
-		background: var(--background);
-	}
-	button {
-		flex-grow: 1;
-		height: 48px;
-		
-		border: 0;
-		background: transparent;
-		color: var(--foreground);
-		
-		&[disabled] {
-			opacity: 0.5;
-		}
-	}
+	@import 'Tabs';
 </style>
 
 <nav class="tabs">

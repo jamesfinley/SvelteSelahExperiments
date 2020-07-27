@@ -17,29 +17,8 @@
 	}
 </script>
 
-<style>
-	main {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 100%;
-	}
-	
-	main :global(.navigation) {
-		flex-shrink: 0;
-	}
-	main :global(.tabs) {
-		flex-shrink: 0;
-	}
-	
-	.app--view {
-		flex-grow: 1;
-		overflow: auto;
-	}
-	
-	main :global(.root-note-control) {
-		margin: 0 16px 16px;
-	}
+<style type="text/scss">
+	@import 'App';
 </style>
 
 <Router url="{url}">
