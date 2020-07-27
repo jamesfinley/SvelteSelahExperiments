@@ -1,52 +1,47 @@
 import Scale from './Scale.js';
 
-var faker = require('faker');
+const faker = require('faker');
+let name;
+let steps;
+let scale;
 
-it('has name', () => {
-	const name = faker.random.words();
-	const steps = [1,2,3].map(() => faker.random.number());
-	const scale = new Scale(name, steps);
-	
-	expect(scale.name).toBe(name);
+const spy = jest.spyOn(global.console, 'error');
+
+beforeEach(() => {
+	name = faker.random.words();
+	steps = [1,2,3].map(() => faker.random.number());
+	scale = new Scale(name, steps);
 });
 
-it('consoles error when name is not string', () => {
-	const name = faker.random.number();
-	const steps = [1,2,3].map(() => faker.random.number());
+describe('Name', () => {
+	it('has name', () => {
+		expect(scale.name).toBe(name);
+	});
 	
-	const spy = jest.spyOn(global.console, 'error');
-	
-	const scale = new Scale(name, steps);
-	
-	expect(spy).toHaveBeenCalled();
+	it('consoles error when name is not string', () => {
+		name = faker.random.number();
+		scale = new Scale(name, steps);
+		
+		expect(spy).toHaveBeenCalled();
+	});
 });
 
-it('has steps', () => {
-	const name = faker.random.words();
-	const steps = [1,2,3].map(() => faker.random.number());
-	const scale = new Scale(name, steps);
+describe('Steps', () => {
+	it('has steps', () => {
+		expect(scale.steps).toBe(steps);
+	});
 	
-	expect(scale.steps).toBe(steps);
-});
-
-it('consoles error when steps is not an array', () => {
-	const name = faker.random.words();
-	const steps = faker.random.words();
+	it('consoles error when steps is not an array', () => {
+		steps = faker.random.words();
+		scale = new Scale(name, steps);
+		
+		expect(spy).toHaveBeenCalled();
+	});
 	
-	const spy = jest.spyOn(global.console, 'error');
-	
-	const scale = new Scale(name, steps);
-	
-	expect(spy).toHaveBeenCalled();
-});
-
-it('consoles error when steps is not an array of numbers', () => {
-	const name = faker.random.words();
-	const steps = [1,2,3].map(() => faker.random.words());
-	
-	const spy = jest.spyOn(global.console, 'error');
-	
-	const scale = new Scale(name, steps);
-	
-	expect(spy).toHaveBeenCalled();
+	it('consoles error when steps is not an array of numbers', () => {
+		steps = [1,2,3].map(() => faker.random.words());
+		scale = new Scale(name, steps);
+		
+		expect(spy).toHaveBeenCalled();
+	});
 });
