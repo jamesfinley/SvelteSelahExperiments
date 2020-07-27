@@ -91,4 +91,18 @@ describe('Fingerboard', () => {
 			});
 		});
 	});
+	
+	it('has same number of strings as notes initialized with', () => {
+		const stringCount = tuning.noteOnFrets.length;
+		expect(tuning.fingerboard.length).toBe(stringCount);
+	});
+	
+	it('has strings starting on same notes initialized with', () => {
+		const stringNotes = noteOnFrets.map(({note}) => note);
+		const fingerboardStringNotes = tuning.fingerboard.map(string => string[0].note);
+		
+		fingerboardStringNotes.forEach((fingerboardStringNotes, index) => {
+			expect(fingerboardStringNotes.name).toBe(stringNotes[index].name);
+		});
+	});
 });
