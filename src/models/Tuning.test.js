@@ -105,4 +105,7 @@ describe('Fingerboard', () => {
 			expect(fingerboardStringNotes.name).toBe(stringNotes[index].name);
 		});
 	});
+	
+	// TODO: has strings with notes ascending from initialized starting notes
+	// TODO: has strings with frets descending from initialized starting notes
 });
