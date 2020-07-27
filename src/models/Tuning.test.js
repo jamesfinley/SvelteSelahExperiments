@@ -72,3 +72,23 @@ describe('Diatonic', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 });
+
+describe('Fingerboard', () => {
+	it('is array', () => {
+		expect(Array.isArray(tuning.fingerboard)).toBe(true);
+	});
+	
+	it('is array of arrays', () => {
+		tuning.fingerboard.forEach((string) => {
+			expect(Array.isArray(string)).toBe(true);
+		});
+	});
+	
+	it('is array of arrays of NoteOnFret', () => {
+		tuning.fingerboard.forEach(string => {
+			string.forEach(noteOnFret => {
+				expect(noteOnFret.constructor == NoteOnFret).toBe(true);
+			});
+		});
+	});
+});
