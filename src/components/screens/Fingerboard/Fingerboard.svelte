@@ -1,5 +1,5 @@
 <script>
-	import { rootNote, tuning, scale } from '../../stores.js';
+	import { rootNote, tuning, scale } from '../../../stores.js';
 </script>
 
 <svelte:head>

@@ -1,11 +1,11 @@
 <script>
 	import { Router, Link, Route, navigate } from "svelte-routing";
 	
-	import Navigation from './components/Navigation.svelte';
-	import RootNoteControl from './components/RootNoteControl.svelte';
-	import Tabs from './components/Tabs.svelte';
+	import Navigation from './components/Navigation/Navigation.svelte';
+	import RootNoteControl from './components/RootNoteControl/RootNoteControl.svelte';
+	import Tabs from './components/Tabs/Tabs.svelte';
 	
-	import Fingerboard from './components/screens/Fingerboard.svelte';
+	import Fingerboard from './components/screens/Fingerboard/Fingerboard.svelte';
 	import Tablature from './components/screens/Tablature.svelte';
 	import Staff from './components/screens/Staff.svelte';
 	import Magic from './components/screens/Magic.svelte';

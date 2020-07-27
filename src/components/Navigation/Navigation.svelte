@@ -1,8 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import Button from './Button.svelte';
-	import { tuning } from '../stores.js';
-	import { Tunings } from '../models/Tuning.js';
+	import Button from '../Button/Button.svelte';
+	import { tuning } from '../../stores.js';
+	import { Tunings } from '../../models/Tuning.js';
 	
 	const dispatch = createEventDispatcher();
 	

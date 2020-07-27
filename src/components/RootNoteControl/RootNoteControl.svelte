@@ -1,6 +1,6 @@
 <script>
-	import Notes from "../models/Note.js";
-	import { rootNote } from '../stores.js';
+	import Notes from "../../models/Note.js";
+	import { rootNote } from '../../stores.js';
 	
 	const rootClass = "root-note-control--root";
 	const accidentalClass = "root-note-control--accidental";
