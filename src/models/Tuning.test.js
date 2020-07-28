@@ -106,6 +106,39 @@ describe('Fingerboard', () => {
 		});
 	});
 	
-	// TODO: has strings with notes ascending from initialized starting notes
-	// TODO: has strings with frets descending from initialized starting notes
+	it('has strings ascending from initialized starting notes', () => {
+		const stringNotes = noteOnFrets.map(({note}) => note);
+		const fingerboardStringNotes = tuning.fingerboard.map(string => string.map(({note}) => note));
+		
+		fingerboardStringNotes.forEach((fingerboardStringNote, index) => {
+			let startingStringNote = stringNotes[index];
+			let stringNoteIndex = notesInOrder.indexOf(startingStringNote);
+			let expectedStringNotes = [startingStringNote, ...Array.from(Array(12).keys()).map((value, fret) => {
+				stringNoteIndex = stringNoteIndex == notesInOrder.length - 1 ? 0 : stringNoteIndex + 1;
+				return notesInOrder[stringNoteIndex];
+			})];
+			
+			fingerboardStringNote.forEach((note, index) => {
+				expect(note.name).toBe(expectedStringNotes[index].name);
+			});
+		});
+	});
+	
+	it('has strings ascending from initialized starting notes', () => {
+		const stringFrets = noteOnFrets.map(({fret}) => fret);
+		const fingerboardStringFrets = tuning.fingerboard.map(string => string.map(({fret}) => fret));
+		
+		fingerboardStringFrets.forEach((fingerboardStringFret, index) => {
+			let startingStringNote = stringFrets[index];
+			let expectedStringFrets = [startingStringNote, ...Array.from(Array(12).keys()).map((value, fret) => {
+				return fret + 1;
+			})];
+			
+			fingerboardStringFret.forEach((note, index) => {
+				expect(note).toBe(expectedStringFrets[index]);
+			});
+		});
+	});
+	
+	// TODO: Fingerboard for Scale
 });
