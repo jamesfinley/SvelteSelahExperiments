@@ -15,4 +15,11 @@
 	@import 'Button';
 </style>
 
-<button disabled={disabled} on:click={clickHandler} class="btn btn-{animationDirection}"><slot></slot></button>
+<button
+	data-testid="button"
+	disabled={disabled}
+	class="btn btn-animation-{animationDirection} btn-mode-{mode}"
+	on:click={clickHandler}
+>
+	<slot></slot>
+</button>
