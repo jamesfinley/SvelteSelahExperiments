@@ -2,14 +2,14 @@ import Button from "./Button.svelte";
 import { render, fireEvent } from '@testing-library/svelte';
 const faker = require('faker');
 
-let rerender, getByText, getByTestId, animationDirection, mode, disabled;
+let rerender, component, getByText, getByTestId, animationDirection, mode, disabled;
 
 beforeEach(() => {
 	animationDirection = faker.random.arrayElement(['left', 'right']);
 	mode = faker.random.arrayElement(['button', 'dropdown']);
 	disabled = false;
 	
-	({ rerender, getByText, getByTestId } = render(Button, {
+	({ rerender, component, getByText, getByTestId } = render(Button, {
 		animationDirection,
 		mode,
 		disabled,
@@ -68,3 +68,17 @@ describe("Disabled", () => {
 		expect(button.disabled).toBe(false);
 	});
 });
+
+describe("Click Handler", () => {
+	it('calls handler when clicked', () => {
+		const button = getByTestId('button');
+		const mockOnClick = jest.fn();
+		component.$on('click', mockOnClick);
+		
+		fireEvent.click(button);
+		
+		expect(mockOnClick).toHaveBeenCalled();
+	});
+});
+
+// TODO: test children
