@@ -5,7 +5,6 @@ import '@testing-library/jest-dom';
 
 let component, getByText, getByTestId, calledNote;
 
-jest.mock('../../stores.js');
 import { rootNote } from '../../stores.js';
 
 beforeEach(() => {
