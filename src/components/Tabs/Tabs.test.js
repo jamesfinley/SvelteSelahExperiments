@@ -1,7 +1,6 @@
 import Tabs from "./Tabs.svelte";
 import { render, fireEvent } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
-const faker = require('faker');
 
 let component, getByText, getByTestId;
 
