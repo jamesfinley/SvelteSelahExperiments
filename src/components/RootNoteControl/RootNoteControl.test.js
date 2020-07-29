@@ -1,5 +1,5 @@
 import RootNoteControl from "./RootNoteControl.svelte";
-import Notes from "../../models/Note.js";
+import Notes, { Note } from "../../models/Note.js";
 import { render, fireEvent } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
 
@@ -16,91 +16,38 @@ beforeEach(() => {
 });
 
 describe('Buttons', () => {
-	it('has C button', () => {
-		expect(getByTestId('C')).toBeInTheDocument();
-	});
-	it('has C# button', () => {
-		expect(getByTestId('C#')).toBeInTheDocument();
-	});
-	it('has D button', () => {
-		expect(getByTestId('D')).toBeInTheDocument();
-	});
-	it('has D# button', () => {
-		expect(getByTestId('D#')).toBeInTheDocument();
-	});
-	it('has E button', () => {
-		expect(getByTestId('E')).toBeInTheDocument();
-	});
-	it('has F button', () => {
-		expect(getByTestId('F')).toBeInTheDocument();
-	});
-	it('has F# button', () => {
-		expect(getByTestId('F#')).toBeInTheDocument();
-	});
-	it('has G button', () => {
-		expect(getByTestId('G')).toBeInTheDocument();
-	});
-	it('has G# button', () => {
-		expect(getByTestId('G#')).toBeInTheDocument();
-	});
-	it('has A button', () => {
-		expect(getByTestId('A')).toBeInTheDocument();
-	});
-	it('has A# button', () => {
-		expect(getByTestId('A#')).toBeInTheDocument();
-	});
-	it('has B button', () => {
-		expect(getByTestId('B')).toBeInTheDocument();
+	['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'].forEach(noteName => {
+		it(`has ${noteName} button`, () => {
+			expect(getByTestId(noteName)).toBeInTheDocument();
+		});
 	});
 });
 
 describe('Updates store', () => {
-	it('clicks C button', () => {
-		fireEvent.click(getByTestId('C'));
-		expect(calledNote).toBe(Notes.c);
+	['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'].forEach(noteName => {
+		it(`clicks ${noteName} button`, () => {
+			fireEvent.click(getByTestId(noteName));
+			expect(calledNote.toString()).toBe(new Note(noteName).toString());
+		});
 	});
-	it('clicks C# button', () => {
-		fireEvent.click(getByTestId('C#'));
-		expect(calledNote).toBe(Notes.cSharp);
+});
+
+describe('Selected', () => {
+	['C', 'D', 'E', 'F', 'G', 'A', 'B'].forEach(noteName => {
+		it(`updates selected to ${noteName} when rootNote changes`, () => {
+			rootNote.update(value => new Note(noteName));
+			setTimeout(() => {
+				expect(getByTestId(noteName).classList.contains('root-note-control--selected')).toBe(true);
+			}, 100);
+		});
 	});
-	it('clicks D button', () => {
-		fireEvent.click(getByTestId('D'));
-		expect(calledNote).toBe(Notes.d);
-	});
-	it('clicks D# button', () => {
-		fireEvent.click(getByTestId('D#'));
-		expect(calledNote).toBe(Notes.dSharp);
-	});
-	it('clicks E button', () => {
-		fireEvent.click(getByTestId('E'));
-		expect(calledNote).toBe(Notes.e);
-	});
-	it('clicks F button', () => {
-		fireEvent.click(getByTestId('F'));
-		expect(calledNote).toBe(Notes.f);
-	});
-	it('clicks F# button', () => {
-		fireEvent.click(getByTestId('F#'));
-		expect(calledNote).toBe(Notes.fSharp);
-	});
-	it('clicks G button', () => {
-		fireEvent.click(getByTestId('G'));
-		expect(calledNote).toBe(Notes.g);
-	});
-	it('clicks G# button', () => {
-		fireEvent.click(getByTestId('G#'));
-		expect(calledNote).toBe(Notes.gSharp);
-	});
-	it('clicks A button', () => {
-		fireEvent.click(getByTestId('A'));
-		expect(calledNote).toBe(Notes.a);
-	});
-	it('clicks A# button', () => {
-		fireEvent.click(getByTestId('A#'));
-		expect(calledNote).toBe(Notes.aSharp);
-	});
-	it('clicks B button', () => {
-		fireEvent.click(getByTestId('B'));
-		expect(calledNote).toBe(Notes.b);
+	['C#', 'D#', 'F#', 'G#', 'A#'].forEach(noteName => {
+		it(`updates selected to ${noteName} when rootNote changes`, () => {
+			rootNote.update(value => new Note(noteName));
+			setTimeout(() => {
+				expect(getByTestId(noteName.replace('#', '')).classList.contains('root-note-control--selected')).toBe(true);
+				expect(getByTestId(noteName).classList.contains('root-note-control--selected')).toBe(true);
+			}, 100);
+		});
 	});
 })
