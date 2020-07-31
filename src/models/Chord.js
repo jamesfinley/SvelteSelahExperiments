@@ -7,10 +7,10 @@ export default class Chord {
 			console.error("Chord: rootNote must be Note");
 			return;
 		}
-		if (!type || type.constructor != String) {
-			console.error("Chord: type must be String");
-			return;
-		}
+		// if (!type || type.constructor != String) {
+		// 	console.error("Chord: type must be String");
+		// 	return;
+		// }
 		if (!Array.isArray(notes) || !notes.every(note => note.constructor == NoteOnFret)) {
 			console.error("Chord: notes must be array of Note");
 			return;

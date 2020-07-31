@@ -1,4 +1,5 @@
 import Chord from "./Chord.svelte";
+import ChordModel from "../../models/Chord.js";
 
 import { render } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
@@ -13,11 +14,7 @@ let rerender, component, getByText, findByText, getByTestId;
 let rootNote, type, notes, chord, showName, showWholeName;
 
 const myRerender = () => {
-	chord = {
-		rootNote,
-		type,
-		notes
-	};
+	chord = new ChordModel(rootNote, type, notes);
 	
 	rerender({
 		props: {
@@ -45,11 +42,7 @@ beforeEach(() => {
 		}));
 	})
 	
-	chord = {
-		rootNote,
-		type,
-		notes
-	};
+	chord = new ChordModel(rootNote, type, notes);
 	
 	({ rerender, component, getByText, findByText, getByTestId } = render(Chord, { chord, showName, showWholeName }));
 });

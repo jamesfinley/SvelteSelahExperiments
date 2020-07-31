@@ -8,7 +8,7 @@ let chord, rootNote, notes, type, spy;
 
 beforeEach(() => {
 	rootNote = faker.random.arrayElement(notesInOrder);
-	type = faker.random.words();
+	type = { name: faker.random.words() };
 	notes = Array.from(Array(faker.random.number({
 		'min': 1,
 		'max': 7
@@ -41,12 +41,12 @@ describe('Type', () => {
 		expect(chord.type).toBe(type);
 	});
 	
-	it('consoles error when type is not string', () => {
-		type = faker.random.number();
-		chord = new Chord(rootNote, type, notes);
-		
-		expect(spy).toHaveBeenCalled();
-	});
+	// it('consoles error when type is not string', () => {
+	// 	type = faker.random.number();
+	// 	chord = new Chord(rootNote, type, notes);
+	// 	
+	// 	expect(spy).toHaveBeenCalled();
+	// });
 });
 
 describe('Notes', () => {
