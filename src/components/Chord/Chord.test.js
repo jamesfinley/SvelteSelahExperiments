@@ -1,5 +1,6 @@
 import Chord from "./Chord.svelte";
 import ChordModel from "../../models/Chord.js";
+import ChordType from "../../models/ChordType.js";
 
 import { render } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
@@ -29,9 +30,7 @@ beforeEach(() => {
 	showName = undefined;
 	showWholeName = undefined;
 	rootNote = faker.random.arrayElement(notesInOrder);
-	type = {
-		name: faker.random.words()
-	};
+	type = new ChordType(faker.random.words());
 	notes = Array.from(Array(faker.random.number({
 	    'min': 1,
 	    'max': 7

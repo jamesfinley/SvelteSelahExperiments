@@ -1,5 +1,6 @@
 import { Note } from './Note.js';
 import NoteOnFret from './NoteOnFret.js';
+import ChordType from './ChordType.js';
 
 export default class Chord {
 	constructor(rootNote, type, notes) {
@@ -7,10 +8,10 @@ export default class Chord {
 			console.error("Chord: rootNote must be Note");
 			return;
 		}
-		// if (!type || type.constructor != String) {
-		// 	console.error("Chord: type must be String");
-		// 	return;
-		// }
+		if (!type || type.constructor != ChordType) {
+			console.error("Chord: type must be ChordType");
+			return;
+		}
 		if (!Array.isArray(notes) || !notes.every(note => note.constructor == NoteOnFret)) {
 			console.error("Chord: notes must be array of Note");
 			return;

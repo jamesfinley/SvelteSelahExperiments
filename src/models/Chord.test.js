@@ -1,6 +1,7 @@
 import Chord from './Chord.js';
 import Notes, { notesInOrder } from './Note.js';
 import NoteOnFret from "./NoteOnFret.js";
+import ChordType from "./ChordType.js";
 
 const faker = require('faker');
 
@@ -8,7 +9,7 @@ let chord, rootNote, notes, type, spy;
 
 beforeEach(() => {
 	rootNote = faker.random.arrayElement(notesInOrder);
-	type = { name: faker.random.words() };
+	type = new ChordType(faker.random.words());
 	notes = Array.from(Array(faker.random.number({
 		'min': 1,
 		'max': 7
@@ -41,12 +42,12 @@ describe('Type', () => {
 		expect(chord.type).toBe(type);
 	});
 	
-	// it('consoles error when type is not string', () => {
-	// 	type = faker.random.number();
-	// 	chord = new Chord(rootNote, type, notes);
-	// 	
-	// 	expect(spy).toHaveBeenCalled();
-	// });
+	it('consoles error when type is not ChordType', () => {
+		type = faker.random.number();
+		chord = new Chord(rootNote, type, notes);
+		
+		expect(spy).toHaveBeenCalled();
+	});
 });
 
 describe('Notes', () => {
