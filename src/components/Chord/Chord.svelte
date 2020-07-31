@@ -5,9 +5,23 @@
 </script>
 
 <div class="chord">
-	<div class="chord--strings">
+	<div
+		data-testid="strings"
+		class="chord--strings"
+		style="--stringCount: {chord.notes.length};"
+	>
 		{#each chord.notes as note, index}
-			<div data-testid="string--{index}" class="chord--string"></div>
+			<div
+				data-testid="string--{index}"
+				class="chord--string"
+				style="--string: {index};"
+			>
+				<div
+					data-testid="note"
+					class="chord--string--note"
+					style="--fret: {note.fret};"
+				></div>
+			</div>
 		{/each}
 	</div>
 

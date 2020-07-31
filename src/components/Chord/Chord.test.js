@@ -2,6 +2,7 @@ import Chord from "./Chord.svelte";
 
 import { render } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
+import { queryAllByTestId } from '@testing-library/dom/dist/@testing-library/dom.umd.js'
 const faker = require('faker');
 
 import Notes, { notesInOrder } from "../../models/Note.js";
@@ -32,7 +33,7 @@ beforeEach(() => {
 	showWholeName = undefined;
 	rootNote = faker.random.arrayElement(notesInOrder);
 	type = {
-		name: "major"
+		name: faker.random.words()
 	};
 	notes = Array.from(Array(faker.random.number({
 	    'min': 1,
@@ -40,7 +41,7 @@ beforeEach(() => {
 	})).keys()).map(() => {
 		return new NoteOnFret(faker.random.arrayElement(notesInOrder), faker.random.number({
 			'min': 0,
-			'max': 12
+			'max': 5
 		}));
 	})
 	
@@ -67,16 +68,24 @@ it('shows chord name', () => {
 	expect(getByText(`${rootNote.name} ${type.name}`)).toBeInTheDocument();
 });
 
+it('has string count', () => {
+	expect(getByTestId('strings')).toHaveAttribute('style', `--stringCount: ${notes.length};`);
+});
+
 it('shows each string', () => {
 	notes.forEach((note, index) => {
-		expect(getByTestId(`string--${index}`)).toBeInTheDocument();
+		const string = getByTestId(`string--${index}`);
+		expect(string).toBeInTheDocument();
+		expect(string).toHaveAttribute('style', `--string: ${index};`);
 	});
 });
 
 it('shows each note', () => {
 	notes.forEach((note, index) => {
 		const string = getByTestId(`string--${index}`);
-		// TODO: see that note is on string
-		//expect(getByTestId(`string--${index}`)).toBeInTheDocument();
+		const noteEls = queryAllByTestId(string, 'note');
+		expect(noteEls).toHaveLength(1);
+		const noteEl = noteEls[0];
+		expect(noteEl).toHaveAttribute('style', `--fret: ${notes[index].fret};`);
 	});
 });
