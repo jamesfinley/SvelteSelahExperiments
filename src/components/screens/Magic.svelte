@@ -10,8 +10,6 @@
 		new NoteOnFret(Notes.g, 0),
 		new NoteOnFret(Notes.e, 2),
 		new NoteOnFret(Notes.c, 3),
-		new NoteOnFret(Notes.c, 3),
-		new NoteOnFret(Notes.c, 3),
 	]);
 </script>
 
