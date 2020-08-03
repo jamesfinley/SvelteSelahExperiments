@@ -3,8 +3,8 @@
 	export let showName = false;
 	export let showWholeName = false;
 	
-	let fretCount = 6;
-	let fretArray = Array.from(Array(fretCount).keys());
+	export let fretCount = 6;
+	let fretArray = Array.from(Array(parseInt(fretCount)).keys());
 	fretArray.shift();
 </script>
 
