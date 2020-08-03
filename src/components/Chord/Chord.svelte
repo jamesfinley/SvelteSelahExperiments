@@ -2,6 +2,10 @@
 	export let chord;
 	export let showName = false;
 	export let showWholeName = false;
+	
+	let fretCount = 6;
+	let fretArray = Array.from(Array(fretCount).keys());
+	fretArray.shift();
 </script>
 
 <style type="text/scss">
@@ -12,9 +16,9 @@
 	<div
 		data-testid="strings"
 		class="chord--strings"
-		style="--stringCount: {chord.notes.length}; --fretCount: 6;"
+		style="--stringCount: {chord.notes.length}; --fretCount: {fretCount};"
 	>
-		{#each [1, 2, 3, 4, 5] as fret}
+		{#each fretArray as fret}
 			<div
 				data-testid="fret--{fret}"
 				class="chord--strings--fret"
