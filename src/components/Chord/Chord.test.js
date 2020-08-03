@@ -61,14 +61,34 @@ it('shows chord name', () => {
 });
 
 it('has string count', () => {
-	expect(getByTestId('strings')).toHaveAttribute('style', `--stringCount: ${notes.length};`);
+	expect(getByTestId('strings')).toHaveAttribute('style', `--stringCount: ${notes.length}; --fretCount: 6;`);
+});
+
+it('shows each fret', () => {
+	expect(getByTestId('fret--1')).toBeInTheDocument();
+	expect(getByTestId('fret--2')).toBeInTheDocument();
+	expect(getByTestId('fret--3')).toBeInTheDocument();
+	expect(getByTestId('fret--4')).toBeInTheDocument();
+	expect(getByTestId('fret--5')).toBeInTheDocument();
 });
 
 it('shows each string', () => {
 	notes.forEach((note, index) => {
 		const string = getByTestId(`string--${index}`);
 		expect(string).toBeInTheDocument();
+		expect(string).toHaveAttribute('data-string', `${index}`);
 		expect(string).toHaveAttribute('style', `--string: ${index};`);
+	});
+});
+
+it('shows each note dot', () => {
+	notes.forEach((note, index) => {
+		const string = getByTestId(`string--${index}`);
+		const noteEls = queryAllByTestId(string, 'note-dot');
+		expect(noteEls).toHaveLength(1);
+		const noteEl = noteEls[0];
+		expect(noteEl).toHaveAttribute('data-fret', `${notes[index].fret}`);
+		expect(noteEl).toHaveAttribute('style', `--fret: ${notes[index].fret};`);
 	});
 });
 
@@ -78,6 +98,5 @@ it('shows each note', () => {
 		const noteEls = queryAllByTestId(string, 'note');
 		expect(noteEls).toHaveLength(1);
 		const noteEl = noteEls[0];
-		expect(noteEl).toHaveAttribute('style', `--fret: ${notes[index].fret};`);
 	});
 });

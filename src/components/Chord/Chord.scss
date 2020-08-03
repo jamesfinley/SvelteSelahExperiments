@@ -1,0 +1,69 @@
+.chord {
+	--dotSize: 10px;
+	position: relative;
+	width: 100px;
+	height: 200px;
+	
+	&--strings {
+		position: absolute;
+		top: 20px;
+		right: 0;
+		bottom: 20px;
+		left: 20px;
+		border: 2px solid var(--foreground);
+		border-radius: 8px;
+		box-sizing: border-box;
+		
+		&--fret {
+			position: absolute;
+			top: calc((var(--fret) / (var(--fretCount)) * 100%) - 1px);
+			width: 100%;
+			height: 2px;
+			background: #000;
+		}
+		
+		&--string {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc((var(--string) / (var(--stringCount) - 1) * 100%) - (var(--dotSize) / 2));
+			width: var(--dotSize);
+			
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: calc(50% - 1px);
+				width: 2px;
+				background: #000;
+			}
+			
+			&[data-string="0"], &:first-of-type, &:last-of-type {
+				&:before {
+					background: transparent;	
+				}
+			}
+			
+			&--note-dot {
+				position: absolute;
+				top: calc(((var(--fret) - 0.5) / var(--fretCount) * 100%) - (var(--dotSize) / 2));
+				width: var(--dotSize);
+				height: var(--dotSize);
+				border-radius: calc(var(--dotSize) / 2);
+				background: #000;
+				
+				&[data-fret="0"] {
+					background: transparent;
+				}
+			}
+			&--note {
+				position: absolute;
+				top: calc(100% + 4px);
+				width: 100%;
+				font-size: 12px;
+				text-align: center;
+			}
+		}
+	}
+}
