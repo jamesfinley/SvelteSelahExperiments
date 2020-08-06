@@ -12,7 +12,7 @@ import NoteOnFret from "../../models/NoteOnFret.js";
 
 let rerender, component, getByText, findByText, getByTestId;
 
-let rootNote, type, notes, chord, showName, showWholeName;
+let rootNote, type, notes, chord, showName, showWholeName, fretCount;
 
 const myRerender = () => {
 	chord = new ChordModel(rootNote, type, notes);
@@ -22,6 +22,7 @@ const myRerender = () => {
 			chord,
 			showName,
 			showWholeName,
+			fretCount,
 		}
 	});
 };
@@ -42,8 +43,9 @@ beforeEach(() => {
 	})
 	
 	chord = new ChordModel(rootNote, type, notes);
+	fretCount = 6;
 	
-	({ rerender, component, getByText, findByText, getByTestId } = render(Chord, { chord, showName, showWholeName }));
+	({ rerender, component, getByText, findByText, getByTestId } = render(Chord, { chord, showName, showWholeName, fretCount }));
 });
 
 it('shows chord name', () => {
@@ -65,11 +67,15 @@ it('has string count', () => {
 });
 
 it('shows each fret', () => {
-	expect(getByTestId('fret--1')).toBeInTheDocument();
-	expect(getByTestId('fret--2')).toBeInTheDocument();
-	expect(getByTestId('fret--3')).toBeInTheDocument();
-	expect(getByTestId('fret--4')).toBeInTheDocument();
-	expect(getByTestId('fret--5')).toBeInTheDocument();
+	fretCount = 3;
+	myRerender();
+	
+	let fretArray = Array.from(Array(parseInt(fretCount)).keys());
+	fretArray.shift();
+	
+	fretArray.forEach(fret => {
+		expect(getByTestId(`fret--${fret}`)).toBeInTheDocument();
+	})
 });
 
 it('shows each string', () => {
