@@ -94,4 +94,18 @@
 			}
 		}
 	}
+	
+	&[data-showing-name="true"] {
+		.chord--strings {
+			bottom: 40px;
+		}
+	}
+	
+	&--name {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		font-size: 14px;
+		text-align: center;
+	}
 }

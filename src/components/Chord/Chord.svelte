@@ -12,7 +12,7 @@
 	@import 'Chord';
 </style>
 
-<div class="chord">
+<div class="chord" data-showing-name="{showName || showWholeName ? 'true' : 'false'}">
 	<div
 		data-testid="strings"
 		class="chord--strings"
