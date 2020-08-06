@@ -31,17 +31,31 @@
 				data-string={index}
 				style="--string: {index};"
 			>
-				<div
-					data-testid="note-dot"
-					class="chord--strings--string--note-dot"
-					data-fret={note.fret}
-					style="--fret: {note.fret};"
-				></div>
-				<div
-					data-testid="note"
-					class="chord--strings--string--note"
-					data-fret={note.fret}
-				>{note.note.name}</div>
+				{#if note !== null}
+					{#if note.fret !== 0}
+						<div
+							data-testid="note-dot"
+							class="chord--strings--string--note-dot"
+							data-fret={note.fret}
+							style="--fret: {note.fret};"
+						></div>
+					{:else}
+						<div
+							data-testid="open"
+							class="chord--strings--string--open"
+							/>
+					{/if}
+					<div
+						data-testid="note"
+						class="chord--strings--string--note"
+						data-fret={note.fret}
+					>{note.note.name}</div>
+				{:else}
+					<div
+						data-testid="mute"
+						class="chord--strings--string--mute"
+					/>
+				{/if}
 			</div>
 		{/each}
 	</div>

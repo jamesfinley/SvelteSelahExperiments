@@ -12,7 +12,7 @@ export default class Chord {
 			console.error("Chord: type must be ChordType");
 			return;
 		}
-		if (!Array.isArray(notes) || !notes.every(note => note.constructor == NoteOnFret)) {
+		if (!Array.isArray(notes) || !notes.every(note => note === null || note.constructor == NoteOnFret)) {
 			console.error("Chord: notes must be array of Note");
 			return;
 		}

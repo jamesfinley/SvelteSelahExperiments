@@ -33,14 +33,14 @@ beforeEach(() => {
 	rootNote = faker.random.arrayElement(notesInOrder);
 	type = new ChordType(faker.random.words());
 	notes = Array.from(Array(faker.random.number({
-	    'min': 1,
+	    'min': 2,
 	    'max': 7
 	})).keys()).map(() => {
 		return new NoteOnFret(faker.random.arrayElement(notesInOrder), faker.random.number({
-			'min': 0,
+			'min': 1,
 			'max': 5
 		}));
-	})
+	});
 	
 	chord = new ChordModel(rootNote, type, notes);
 	fretCount = 6;
@@ -104,5 +104,93 @@ it('shows each note', () => {
 		const noteEls = queryAllByTestId(string, 'note');
 		expect(noteEls).toHaveLength(1);
 		const noteEl = noteEls[0];
+	});
+});
+
+it('shows open symbols', () => {
+	notes = Array.from(Array(faker.random.number({
+		'min': 2,
+		'max': 7
+	})).keys()).map(string => {
+		return new NoteOnFret(faker.random.arrayElement(notesInOrder), string == 0 ? 0 : faker.random.number({
+			'min': 0,
+			'max': 5
+		}));
+	});
+	
+	chord = new ChordModel(rootNote, type, notes);
+	myRerender();
+	
+	const string = getByTestId(`string--0`);
+	const noteEls = queryAllByTestId(string, 'open');
+	expect(noteEls).toHaveLength(1);
+	const noteEl = noteEls[0];
+	expect(noteEl).toHaveClass('chord--strings--string--open');
+});
+
+it('does not show open symbols on notes not on 0 fret', () => {
+	notes = Array.from(Array(faker.random.number({
+		'min': 2,
+		'max': 7
+	})).keys()).map(string => {
+		return new NoteOnFret(faker.random.arrayElement(notesInOrder), string == 0 ? 0 : faker.random.number({
+			'min': 0,
+			'max': 5
+		}));
+	});
+	
+	chord = new ChordModel(rootNote, type, notes);
+	myRerender();
+	
+	notes.forEach((note, index) => {
+		if (note.fret != 0) {
+			const string = getByTestId(`string--${index}`);
+			const noteEls = queryAllByTestId(string, 'open');
+			expect(noteEls).toHaveLength(0);
+		}
+	});
+});
+
+it('shows mute symbols', () => {
+	notes = Array.from(Array(faker.random.number({
+		'min': 2,
+		'max': 7
+	})).keys()).map(string => {
+		return string == 0 ? null : new NoteOnFret(faker.random.arrayElement(notesInOrder), faker.random.number({
+			'min': 0,
+			'max': 5
+		}));
+	});
+	
+	chord = new ChordModel(rootNote, type, notes);
+	myRerender();
+	
+	const string = getByTestId(`string--0`);
+	const noteEls = queryAllByTestId(string, 'mute');
+	expect(noteEls).toHaveLength(1);
+	const noteEl = noteEls[0];
+	expect(noteEl).toHaveClass('chord--strings--string--mute');
+});
+
+it('does not show mute symbols on notes not on 0 fret', () => {
+	notes = Array.from(Array(faker.random.number({
+		'min': 2,
+		'max': 7
+	})).keys()).map(string => {
+		return string == 0 ? null : new NoteOnFret(faker.random.arrayElement(notesInOrder), faker.random.number({
+			'min': 0,
+			'max': 5
+		}));
+	});
+	
+	chord = new ChordModel(rootNote, type, notes);
+	myRerender();
+	
+	notes.forEach((note, index) => {
+		if (note !== null) {
+			const string = getByTestId(`string--${index}`);
+			const noteEls = queryAllByTestId(string, 'mute');
+			expect(noteEls).toHaveLength(0);
+		}
 	});
 });

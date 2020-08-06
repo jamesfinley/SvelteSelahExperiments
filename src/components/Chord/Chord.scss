@@ -64,6 +64,34 @@
 				font-size: 12px;
 				text-align: center;
 			}
+			&--open {
+				position: absolute;
+				top: calc(0px - var(--dotSize) - 8px);
+				width: var(--dotSize);
+				height: var(--dotSize);
+				border-radius: calc(var(--dotSize) / 2);
+				border: 2px solid var(--foreground);
+				box-sizing: border-box;
+			}
+			&--mute {
+				position: absolute;
+				top: calc(0px - var(--dotSize) - 8px);
+				left: calc((var(--dotSize) - 2px) / 2);
+				width: 2px;
+				height: var(--dotSize);
+				background: var(--foreground);
+				transform: rotate(45deg);
+				
+				&:before {
+					content: '';
+					position: absolute;
+					top: calc((var(--dotSize) - 2px) / 2);
+					left: calc(0px - (var(--dotSize) - 2px) / 2);
+					width: var(--dotSize);
+					height: 2px;
+					background: var(--foreground);
+				}
+			}
 		}
 	}
 }

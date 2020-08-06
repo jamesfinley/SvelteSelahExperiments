@@ -68,4 +68,14 @@ describe('Notes', () => {
 		
 		expect(spy).toHaveBeenCalled();
 	});
+	
+	it('does not console error when notes is array of null', () => {
+		notes = [null, null, new NoteOnFret(faker.random.arrayElement(notesInOrder), faker.random.number({
+			'min': 0,
+			'max': 5
+		}))];
+		chord = new Chord(rootNote, type, notes);
+		
+		expect(spy).not.toHaveBeenCalled();
+	});
 });
