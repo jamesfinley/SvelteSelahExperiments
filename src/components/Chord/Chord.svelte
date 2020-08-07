@@ -61,6 +61,6 @@
 	</div>
 
 	{#if showName || showWholeName}
-		<span class="chord--name">{#if showWholeName}{chord.rootNote.name}{/if} {chord.type.name}</span>
+		<span class="chord--name">{#if showWholeName}{chord.rootNote.name}{/if} {chord.type.shortName}</span>
 	{/if}
 </div>

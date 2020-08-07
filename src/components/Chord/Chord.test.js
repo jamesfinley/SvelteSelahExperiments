@@ -31,7 +31,7 @@ beforeEach(() => {
 	showName = undefined;
 	showWholeName = undefined;
 	rootNote = faker.random.arrayElement(notesInOrder);
-	type = new ChordType(faker.random.words());
+	type = new ChordType(faker.random.words(), faker.random.words());
 	notes = Array.from(Array(faker.random.number({
 	    'min': 2,
 	    'max': 7
@@ -52,14 +52,14 @@ it('shows chord name', () => {
 	showName = true;
 	myRerender();
 	
-	expect(getByText(type.name)).toBeInTheDocument();
+	expect(getByText(type.shortName)).toBeInTheDocument();
 });
 
 it('shows chord name', () => {
 	showWholeName = true;
 	myRerender();
 	
-	expect(getByText(`${rootNote.name} ${type.name}`)).toBeInTheDocument();
+	expect(getByText(`${rootNote.name} ${type.shortName}`)).toBeInTheDocument();
 });
 
 it('has string count', () => {
