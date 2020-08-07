@@ -1,5 +1,5 @@
 import Scale, { Scales } from "./Scale.js";
-import { Intervals } from "./ChordType.js";
+import { ChordTypes, Intervals } from "./ChordType.js";
 
 export class Note {
 	constructor(name) {
@@ -94,6 +94,24 @@ export class Note {
 	
 	notesForChordType(chordType) {
 		return chordType.intervals.map(interval => this.noteForInterval(interval));
+	}
+	
+	chordsForScale(scale) {
+		const scaleNotes = this.notesForScale(scale);
+		return scaleNotes
+			.map(note => ({
+					key: note,
+					value: Object.keys(ChordTypes)
+						.map(key => ChordTypes[key])
+						.filter(chordType => !note.notesForChordType(chordType)
+												.some(note => scaleNotes.indexOf(note) == -1)
+						)
+				})
+			)
+			.reduce((obj, value) => {
+				obj[value.key.name] = value.value;
+				return obj;
+			}, {});
 	}
 }
 
