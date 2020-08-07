@@ -1,0 +1,24 @@
+.magic {
+	margin: 0 16px;
+	
+	&--degree {
+		&--header {
+			margin-bottom: 16px;
+			padding: 8px 0;
+			border-bottom: 1px solid var(--foreground);
+			font-size: 16px;
+			font-family: var(--fontMedium);
+			text-align: center;
+		}
+		&--chords {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+			column-gap: 16px;
+			margin-bottom: 16px;
+			
+			:global(.chord) {
+				justify-self: center;
+			}
+		}
+	}
+}
