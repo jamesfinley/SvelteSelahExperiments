@@ -76,10 +76,7 @@ export class Note {
 						)
 				})
 			)
-			.reduce((obj, value) => {
-				obj[value.key.name] = value.value;
-				return obj;
-			}, {});
+			.reduce((acc, {key: { name }, value}) => ({[name]: value, ...acc}), {});
 	}
 }
 
