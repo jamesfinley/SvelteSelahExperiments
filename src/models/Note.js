@@ -1,4 +1,5 @@
-import Scale from "./Scale.js";
+import Scale, { Scales } from "./Scale.js";
+import { Intervals } from "./ChordType.js";
 
 export class Note {
 	constructor(name) {
@@ -23,6 +24,63 @@ export class Note {
 			index += step * 2;
 			return notesInOrderPadded[index];
 		})];
+	}
+	
+	noteForInterval(interval) {
+		// get major and minor scale notes
+		const majorScaleNotes = this.notesForScale(Scales.major);
+		const minorScaleNotes = this.notesForScale(Scales.minor);
+		
+		switch (interval) {
+			case Intervals.I:
+				return majorScaleNotes[0];
+				break;
+			case Intervals.II:
+				return majorScaleNotes[1];
+				break;
+			case Intervals.III:
+				return majorScaleNotes[2];
+				break;
+			case Intervals.IV:
+				return majorScaleNotes[3];
+				break;
+			case Intervals.V:
+				return majorScaleNotes[4];
+				break;
+			case Intervals.VI:
+				return majorScaleNotes[5];
+				break;
+			case Intervals.VII:
+				return majorScaleNotes[6];
+				break;
+			case Intervals.i:
+				return minorScaleNotes[0];
+				break;
+			case Intervals.ii:
+				return minorScaleNotes[1];
+				break;
+			case Intervals.iii:
+				return minorScaleNotes[2];
+				break;
+			case Intervals.iv:
+				return minorScaleNotes[3];
+				break;
+			case Intervals.v:
+				return minorScaleNotes[4];
+				break;
+			case Intervals.vi:
+				return minorScaleNotes[5];
+				break;
+			case Intervals.vii:
+				return minorScaleNotes[6];
+				break;
+		}
+		
+		return null;
+	}
+	
+	notesForChordType(chordType) {
+		return chordType.intervals.map(interval => this.noteForInterval(interval));
 	}
 }
 
