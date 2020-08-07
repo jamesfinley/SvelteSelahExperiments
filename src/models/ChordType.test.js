@@ -2,12 +2,13 @@ import ChordType, { Intervals } from './ChordType.js';
 
 const faker = require('faker');
 
-let chordType, name, intervals, spy;
+let chordType, name, shortName, intervals, spy;
 
 beforeEach(() => {
 	name = faker.random.words();
+	shortName = faker.random.words();
 	intervals = [Intervals.I, Intervals.III, Intervals.V];
-	chordType = new ChordType(name, intervals);
+	chordType = new ChordType(name, shortName, intervals);
 	
 	spy = jest.spyOn(global.console, 'error');
 })
@@ -18,7 +19,19 @@ describe('Name', () => {
 	});
 	it('consoles error when name is not String', () => {
 		name = faker.random.number();
-		chordType = new ChordType(name, intervals);
+		chordType = new ChordType(name, shortName, intervals);
+		
+		expect(spy).toHaveBeenCalled();
+	});
+});
+
+describe('Short Name', () => {
+	it('has shortName', () => {
+		expect(chordType.shortName).toBe(shortName);
+	});
+	it('consoles error when shortName is not String', () => {
+		shortName = faker.random.number();
+		chordType = new ChordType(name, shortName, intervals);
 		
 		expect(spy).toHaveBeenCalled();
 	});
@@ -31,13 +44,13 @@ describe('Intervals', () => {
 	
 	it('consoles error when intervals is not Array', () => {
 		intervals = faker.random.number();
-		chordType = new ChordType(name, intervals);
+		chordType = new ChordType(name, shortName, intervals);
 		expect(spy).toHaveBeenCalled();
 	});
 	
 	it('consoles error when intervals is not Array of Intervals', () => {
 		intervals = [faker.random.number(), faker.random.number()];
-		chordType = new ChordType(name, intervals);
+		chordType = new ChordType(name, shortName, intervals);
 		expect(spy).toHaveBeenCalled();
 	});
 });
