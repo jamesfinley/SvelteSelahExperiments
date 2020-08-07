@@ -26,6 +26,16 @@ export class Note {
 		})];
 	}
 	
+	makeFlat() {
+		let index = notesInOrder.map(({name}) => name).indexOf(this.name);
+		if (index == -1) return this;
+		
+		index++;
+		if (index == notesInOrder.length) index = 0;
+		
+		return notesInOrder[index];
+	}
+	
 	noteForInterval(interval) {
 		// get major and minor scale notes
 		const majorScaleNotes = this.notesForScale(Scales.major);
@@ -42,7 +52,10 @@ export class Note {
 				return majorScaleNotes[2];
 				break;
 			case Intervals.IV:
-				return majorScaleNotes[3];
+			return majorScaleNotes[3];
+				break;
+			case Intervals.IVplus:
+				return majorScaleNotes[3].makeFlat();
 				break;
 			case Intervals.V:
 				return majorScaleNotes[4];

@@ -23,6 +23,7 @@ export const Intervals = {
 	II: 'II',
 	III: 'III',
 	IV: 'IV',
+	IVplus: 'IV+',
 	V: 'V',
 	VI: 'VI',
 	VII: 'VII',
@@ -37,7 +38,17 @@ export const Intervals = {
 
 const allIntervals = Object.keys(Intervals).map(key => Intervals[key]);
 
-export const ChordTypes = {
-	'major': new ChordType('major', [Intervals.I, Intervals.III, Intervals.V]),
-	'minor': new ChordType('minor', [Intervals.I, Intervals.iii, Intervals.V]),
-}
+export const ChordTypes = [
+	new ChordType('major', [Intervals.I, Intervals.III, Intervals.V]),
+	new ChordType('minor', [Intervals.I, Intervals.iii, Intervals.V]),
+	new ChordType('diminished', [Intervals.I, Intervals.iii, Intervals.IVplus]),
+	new ChordType('major 7th', [Intervals.I, Intervals.III, Intervals.V, Intervals.VII]),
+	new ChordType('minor 7th', [Intervals.I, Intervals.iii, Intervals.V, Intervals.vii]),
+	new ChordType('seventh', [Intervals.I, Intervals.III, Intervals.V, Intervals.vii]),
+	new ChordType('fifth', [Intervals.I, Intervals.V]),
+	new ChordType('diminished 7', [Intervals.I, Intervals.iii, Intervals.IVplus, Intervals.vii]),
+	new ChordType('minor 7th flat 5th', [Intervals.I, Intervals.iii, Intervals.IVplus, Intervals.vii]),
+].reduce((obj, value) => {
+	obj[value.name.replace(' ', '')] = value;
+	return obj;
+}, {});
