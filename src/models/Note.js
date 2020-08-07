@@ -41,51 +41,19 @@ export class Note {
 		const majorScaleNotes = this.notesForScale(Scales.major);
 		const minorScaleNotes = this.notesForScale(Scales.minor);
 		
+		const majorIntervals = [Intervals.I, Intervals.II, Intervals.III, Intervals.IV, Intervals.V, Intervals.VI, Intervals.VII];
+		const minorIntervals = [Intervals.i, Intervals.ii, Intervals.iii, Intervals.iv, Intervals.v, Intervals.vi, Intervals.vii];
+		
+		if (majorIntervals.indexOf(interval) != -1) {
+			return majorScaleNotes[majorIntervals.indexOf(interval)];
+		}
+		if (minorIntervals.indexOf(interval) != -1) {
+			return minorScaleNotes[minorIntervals.indexOf(interval)];
+		}
+		
 		switch (interval) {
-			case Intervals.I:
-				return majorScaleNotes[0];
-				break;
-			case Intervals.II:
-				return majorScaleNotes[1];
-				break;
-			case Intervals.III:
-				return majorScaleNotes[2];
-				break;
-			case Intervals.IV:
-			return majorScaleNotes[3];
-				break;
 			case Intervals.IVplus:
 				return majorScaleNotes[3].makeFlat();
-				break;
-			case Intervals.V:
-				return majorScaleNotes[4];
-				break;
-			case Intervals.VI:
-				return majorScaleNotes[5];
-				break;
-			case Intervals.VII:
-				return majorScaleNotes[6];
-				break;
-			case Intervals.i:
-				return minorScaleNotes[0];
-				break;
-			case Intervals.ii:
-				return minorScaleNotes[1];
-				break;
-			case Intervals.iii:
-				return minorScaleNotes[2];
-				break;
-			case Intervals.iv:
-				return minorScaleNotes[3];
-				break;
-			case Intervals.v:
-				return minorScaleNotes[4];
-				break;
-			case Intervals.vi:
-				return minorScaleNotes[5];
-				break;
-			case Intervals.vii:
-				return minorScaleNotes[6];
 				break;
 		}
 		
