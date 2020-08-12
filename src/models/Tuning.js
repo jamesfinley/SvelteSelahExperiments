@@ -3,7 +3,7 @@ import Notes, { Note, notesInOrder } from "./Note.js";
 import Scale from "./Scale.js";
 
 export default class Tuning {
-	constructor(name, instrument, noteOnFrets, diatonic = false) {
+	constructor(name, instrument, noteOnFrets, diatonic = false, maxFrets = 4) {
 		if (typeof name != "string") {
 			console.error("Tuning: name must be string");
 			return;
@@ -20,11 +20,16 @@ export default class Tuning {
 			console.error("Tuning: diatonic must be boolean");
 			return;
 		}
+		if (typeof maxFrets != "number") {
+			console.error("Tuning: maxFrets must be number");
+			return;
+		}
 		
 		this.name = name;
 		this.instrument = instrument;
 		this.noteOnFrets = noteOnFrets;
 		this.diatonic = diatonic;
+		this.maxFrets = maxFrets;
 		
 		this.fingerboard = this.noteOnFrets.map(noteOnFret => {
 			let index = notesInOrder.indexOf(noteOnFret.note);
@@ -69,7 +74,9 @@ export const Tunings = [
 					new NoteOnFret(Notes.g),
 					new NoteOnFret(Notes.b),
 					new NoteOnFret(Notes.e),
-				]
+				],
+				false,
+				4,
 			)
 		]
 	},
@@ -84,7 +91,43 @@ export const Tunings = [
 					new NoteOnFret(Notes.g),
 					new NoteOnFret(Notes.d),
 					new NoteOnFret(Notes.a),
-				]
+				],
+				false,
+				7,
+			)
+		]
+	},
+	{
+		name: "Mandolin",
+		tunings: [
+			new Tuning(
+				"Standard",
+				"Mandolin",
+				[
+					new NoteOnFret(Notes.g),
+					new NoteOnFret(Notes.d),
+					new NoteOnFret(Notes.a),
+					new NoteOnFret(Notes.e),
+				],
+				false,
+				7,
+			)
+		]
+	},
+	{
+		name: "Ukulele",
+		tunings: [
+			new Tuning(
+				"Standard",
+				"Ukulele",
+				[
+					new NoteOnFret(Notes.g),
+					new NoteOnFret(Notes.c),
+					new NoteOnFret(Notes.e),
+					new NoteOnFret(Notes.a),
+				],
+				false,
+				5,
 			)
 		]
 	}
