@@ -4,8 +4,11 @@
 	export let showWholeName = false;
 	export let fretCount = 6;
 	
-	let fretArray = Array.from(Array(parseInt(fretCount)).keys());
-	fretArray.shift();
+	let fretArray;
+	$: {
+		fretArray = Array.from(Array(parseInt(fretCount)).keys());
+		fretArray.shift();
+	}
 </script>
 
 <style type="text/scss">

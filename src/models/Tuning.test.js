@@ -3,14 +3,15 @@ import NoteOnFret from "./NoteOnFret.js";
 import Notes, { notesInOrder } from "./Note.js";
 const faker = require('faker');
 
-let name, instrument, noteOnFrets, diatonic, tuning, spy;
+let name, instrument, noteOnFrets, diatonic, maxFrets, tuning, spy;
 
 beforeEach(() => {
 	name = faker.random.words();
 	instrument = faker.random.words();
 	noteOnFrets = [0,1,2].map(() => new NoteOnFret(faker.random.arrayElement(notesInOrder)));
 	diatonic = faker.random.boolean();
-	tuning = new Tuning(name, instrument, noteOnFrets, diatonic);
+	maxFrets = faker.random.number();
+	tuning = new Tuning(name, instrument, noteOnFrets, diatonic, maxFrets);
 	spy = jest.spyOn(global.console, 'error');
 });
 
@@ -68,6 +69,19 @@ describe('Diatonic', () => {
 	it('consoles error when diatonic is not boolean', () => {
 		diatonic = faker.random.number();
 		tuning = new Tuning(name, instrument, noteOnFrets, diatonic);
+		
+		expect(spy).toHaveBeenCalled();
+	});
+});
+
+describe('MaxFrets', () => {
+	it('has maxFrets', () => {
+		expect(tuning.maxFrets).toBe(maxFrets);
+	});
+	
+	it('consoles error when maxFrets is not number', () => {
+		maxFrets = faker.random.words();
+		tuning = new Tuning(name, instrument, noteOnFrets, diatonic, maxFrets);
 		
 		expect(spy).toHaveBeenCalled();
 	});
