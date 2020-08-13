@@ -50,7 +50,7 @@ export default {
 				
 				chord.filter(note => note).forEach(note => {
 					if (lowestFret == null || lowestFret > note.fret) {
-						lowestFret = note.fret;
+						lowestFret = 0;// note.fret;
 					}
 					if (highestFret == null || highestFret < note.fret) {
 						highestFret = note.fret;
