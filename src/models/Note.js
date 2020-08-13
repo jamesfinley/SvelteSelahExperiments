@@ -1,5 +1,6 @@
 import Scale, { Scales } from "./Scale.js";
 import { ChordTypes, Intervals } from "./ChordType.js";
+import Voicings from './Voicings.js';
 
 export class Note {
 	constructor(name) {
@@ -64,7 +65,7 @@ export class Note {
 		return chordType.intervals.map(interval => this.noteForInterval(interval));
 	}
 	
-	chordsForScale(scale) {
+	chordTypesForScale(scale) {
 		const scaleNotes = this.notesForScale(scale);
 		return scaleNotes
 			.map(note => ({
@@ -77,6 +78,23 @@ export class Note {
 				})
 			)
 			.reduce((acc, {key: { name }, value}) => ({[name]: value, ...acc}), {});
+	}
+	
+	chordsForScale(scale, tuning) {
+		let chordTypesForNotes  = this.chordTypesForScale(scale);
+		
+		return this.notesForScale(scale)
+						.map(note => ({
+							key: note,
+							value: chordTypesForNotes[note.name]
+							.map(chordType => {
+								const chords = Voicings.forChordTypeWithRootNoteAndTuning(chordType, note, tuning, tuning.maxFrets - 1);
+								return chords ? {key: chordType, value: chords[0]} : null;
+							})
+							.filter(chord => chord)
+							.reduce((acc, {key: { shortName }, value}) => ({[shortName]: value, ...acc}), {})
+						}))
+						.reduce((acc, {key: { name }, value}) => ({[name]: value, ...acc}), {});
 	}
 }
 

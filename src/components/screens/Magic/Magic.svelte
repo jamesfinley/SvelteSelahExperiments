@@ -10,19 +10,8 @@
 		return n + (s[(v - 20) % 10] || s[v] || s[0]);
 	}
 	
-	$: chordTypesForNotes = $rootNote.chordsForScale($scale);
-	$: chordsForNotes = $rootNote.notesForScale($scale)
-							.map(note => ({
-								key: note,
-								value: chordTypesForNotes[note.name]
-								.map(chordType => {
-									const chords = Voicings.forChordTypeWithRootNoteAndTuning(chordType, note, $tuning, $tuning.maxFrets - 1);
-									return chords ? {key: chordType, value: chords[0]} : null;
-								})
-								.filter(chord => chord)
-								.reduce((acc, {key: { shortName }, value}) => ({[shortName]: value, ...acc}), {})
-							}))
-							.reduce((acc, {key: { name }, value}) => ({[name]: value, ...acc}), {});
+	$: chordTypesForNotes = $rootNote.chordTypesForScale($scale);
+	$: chordsForNotes = $rootNote.chordsForScale($scale, $tuning);
 </script>
 
 <svelte:head>
