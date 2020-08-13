@@ -81,7 +81,7 @@ export class Note {
 	}
 	
 	chordsForScale(scale, tuning) {
-		let chordTypesForNotes  = this.chordTypesForScale(scale);
+		const chordTypesForNotes  = this.chordTypesForScale(scale);
 		
 		return this.notesForScale(scale)
 						.map(note => ({

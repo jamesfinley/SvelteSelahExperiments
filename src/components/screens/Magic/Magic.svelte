@@ -1,8 +1,6 @@
 <script>
 	import { rootNote, scale, tuning } from '../../../stores.js';
-	
 	import Chord from '../../Chord/Chord.svelte';
-	import Voicings from '../../../models/Voicings.js';
 	
 	function getNumberWithOrdinal(n) {
 		const s = ["th", "st", "nd", "rd"],
