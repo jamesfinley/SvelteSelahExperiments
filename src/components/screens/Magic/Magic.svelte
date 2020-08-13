@@ -11,18 +11,18 @@
 	}
 	
 	$: chordTypesForNotes = $rootNote.chordsForScale($scale);
-	let chordsForNotes;
-	$: {
-		chordsForNotes = {};
-		$rootNote.notesForScale($scale).map(note => {
-			let results = {};
-			chordTypesForNotes[note.name].forEach(chordType => {
-				const chords = Voicings.forChordTypeWithRootNoteAndTuning(chordType, note, $tuning, $tuning.maxFrets - 1);
-				results[chordType.shortName] = chords ? chords[0] : null;
-			});
-			chordsForNotes[note.name] = results;
-		})
-	}
+	$: chordsForNotes = $rootNote.notesForScale($scale)
+							.map(note => ({
+								key: note,
+								value: chordTypesForNotes[note.name]
+								.map(chordType => {
+									const chords = Voicings.forChordTypeWithRootNoteAndTuning(chordType, note, $tuning, $tuning.maxFrets - 1);
+									return chords ? {key: chordType, value: chords[0]} : null;
+								})
+								.filter(chord => chord)
+								.reduce((acc, {key: { shortName }, value}) => ({[shortName]: value, ...acc}), {})
+							}))
+							.reduce((acc, {key: { name }, value}) => ({[name]: value, ...acc}), {});
 </script>
 
 <svelte:head>
